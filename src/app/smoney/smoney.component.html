@@ -1,0 +1,44 @@
+
+<div>
+ <button class="gback" (click)="gback()">
+  Back
+</button>
+
+
+
+<div #paypal></div> 
+
+
+<div *ngIf="!paidFor" [hidden]="paidFor">
+  <h1>Plateste!</h1>
+ 
+
+  <zxing-scanner (scanSuccess)="onCodeResult($event)"> </zxing-scanner>
+  
+  <div class="results" *ngIf="qrResultString">  
+      <div>
+        <small>Ai de platit:</small>
+        <strong>{{ qrResultString }}</strong>    
+      </div>       
+    <button (click) = "clearResult()">&times;</button>  
+  </div>
+
+    <!-- PayPal buttons -->
+    <!-- <div [hidden]="!onlyOnceP">   -->
+      <!-- <div #paypal></div>  -->
+    <!-- </div> -->
+
+</div>
+
+
+
+  
+
+
+<div *ngIf = "paidFor">
+  <h1>Plata a fost realizata!</h1> 
+</div>
+
+
+
+</div>

@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "qrcodepay-9f4be",
+    "staging": "qrcodepay-9f4be"
+  }
+}

@@ -1,0 +1,69 @@
+* {
+    box-sizing: border-box;
+}
+
+.container2 {
+    // aici ii dam display flex, tot ce e in el, sunt "copiii".
+    // Am folosit site-ul asta: https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    
+    
+    
+
+
+    // Explicatie justify-content VS align-items:
+    // https://stackoverflow.com/questions/35049262/difference-between-justify-content-vs-align-items
+}
+
+
+input {   
+    font-family: Poppins-Medium;
+    line-height: 1.5;
+    border:none; // scap de efectul ala de shaddow   
+    padding: 15px;
+    font-size: 1.2em;
+    text-align: center;
+    margin-bottom: 15px;
+    width: 80%;
+    height: 25px;
+    border-radius: 25px;
+}
+
+.qrButt{    
+    font-family: Montserrat-Bold;
+    font-size: 1.5em;
+    line-height: 1.5;
+    color: #fff;    
+    background: #57b846;
+    border:none;    
+    margin-bottom: 5px;
+    padding: 5px;   
+    width: 100%;    
+    border-radius: 50px;
+}
+
+.gback {
+
+       
+    border:none;
+    background: #fff;    
+    border-radius: 25px;
+    
+   
+
+}
+
+
+p {
+    font-family: Poppins-Medium;
+    padding: 5px;
+    line-height: 1.5;
+    font-size: 1.2em;
+    text-align: center;   
+    
+}
+
+

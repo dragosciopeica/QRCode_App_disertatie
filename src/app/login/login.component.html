@@ -1,0 +1,32 @@
+<div class="form-container">
+  <h3>
+    <!-- user e obiectul creat in app.components.ts si displayName e o proprietate a obiectului pe care am vazut-o in consola -->
+    Plateste rapid folosind QR-code!  {{ user?.email }} 
+
+    <!-- 
+      Explicatie "?.":
+      user? este acelasi lucru cu:
+      user != null ? user.email : null 
+      Adica, operatorul ternar -->
+  </h3>
+
+  <!-- 
+  Daca NU e user-ul, adica daca NU il vede pe user logat, sa apara butonul de
+  logare. Deci daca e logat, adica il vede, butonul nu apare! -->
+
+  <p class="error" *ngIf="error">{{ error }}</p>
+
+  <button *ngIf="!user" (click)="loginG()" id="google">
+    Login with Google
+  </button>
+
+  <button *ngIf="user" (click)="logout()">
+    Logout
+  </button>
+
+  <button routerLink="/email" id="email">Login with Email</button>
+
+  <a routerLink="/signup" routerLinkActive="active" class="alc"
+    >No account? <strong>Create one here</strong></a
+  >
+</div>

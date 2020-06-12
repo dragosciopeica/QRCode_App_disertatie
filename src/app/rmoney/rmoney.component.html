@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+  </head>
+  <body>
+    <div class="container2">
+
+      <div #paypal></div> 
+
+        <input type="text" placeholder="Introduceti suma dorita si apasati PayPal" [(ngModel)]="qrData">
+        
+        <button (click)="createCode()" class="qrButt">Create QRCode</button>
+        
+        <div>
+
+    <ngx-qrcode       
+            [value] = "createdCode"
+            errorCorrectionLevel = "L"
+            [elementType]="'img'"
+    >          
+      </ngx-qrcode>     
+
+
+       <!-- Explicatie errorCorrection: https://www.fastprint.co.uk/blog/quick-response-codes-what-are-they-and-how-do-they-work.html -->
+      <p>You will receive <strong>{{createdCode}}</strong> RON</p>
+
+      <button class="gback" (click)="gback()">
+        Back
+      </button>
+    </div>   
+        
+
+
+  
+    </div>
+  </body>
+</html>
+
+

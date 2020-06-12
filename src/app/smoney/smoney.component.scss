@@ -1,0 +1,48 @@
+
+
+zxing-scanner {
+    max-width: 100%;
+  }
+
+  .results {
+
+    position: sticky;
+    bottom: 0;
+    padding: 15px;
+    background: #02c3c3;
+    color: #fff;
+  
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  
+    small {
+      font-weight: bolder;
+      display: block;
+      font-size: 60%;
+      margin: -.6em 0 0 0;
+    }
+  
+   
+  }
+
+
+
+  [hidden] {
+    display: none !important;
+  }
+  
+  h2 {
+    padding: 0 16px;
+  }
+
+  .gback {
+
+   
+    border:none;
+    background: #fff;    
+    border-radius: 25px;
+      
+
+}
+  

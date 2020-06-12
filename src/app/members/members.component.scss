@@ -1,0 +1,39 @@
+* {
+  box-sizing: border-box;
+}
+
+.centru {
+ 
+ width: 100%;
+ text-align: center; // asta face sa fie cele 2 div-uri la mijloc
+}
+.r-money {   
+  width: 40%;  
+  cursor: pointer;  
+  margin-left: 5px;    
+  border-radius: 25px; 
+}
+
+.r-money:hover {
+  background: #888181;
+  box-shadow: 4px 2px black;
+  transition: 0.9s;
+  color: white;
+}
+
+.s-money {   
+  width: 40%;
+  cursor: pointer;  
+  border-radius: 25px; 
+}
+
+.s-money:hover {
+  background: #888181;
+  box-shadow: -4px 2px black;
+  transition: 0.9s;
+  color: white;
+}
+
+.logout_members{
+  width: 80%;
+}

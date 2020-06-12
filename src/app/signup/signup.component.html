@@ -1,0 +1,26 @@
+<div class="form-container">
+  <a routerLink="/login" id="goback">Go back</a>
+
+  <h2>Join now</h2>
+
+  <p class="error" *ngIf="error">{{ error }}</p>
+
+  <input type="text" class="txt" placeholder="Username" #userEmail required />
+
+  <input
+    type="password"
+    class="txt"
+    placeholder="Password"
+    #userPassword
+    required
+  />
+
+  <!-- Calling SignUp Api from AuthenticationService -->
+
+  <input
+    type="button"
+    class="basic-btn"
+    value="Sign Up"
+    (click)="SignUp(userEmail.value, userPassword.value)"
+  />
+</div>
