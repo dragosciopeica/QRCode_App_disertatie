@@ -22,6 +22,7 @@ import { RmoneyComponent } from './rmoney/rmoney.component';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { FormsModule } from '@angular/forms'; // pentru a merge ngModule
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -37,6 +38,8 @@ import { FormsModule } from '@angular/forms'; // pentru a merge ngModule
     MembersComponent,
     SmoneyComponent,
     RmoneyComponent,
+    
+    
   ],
   imports: [    
     BrowserModule,
@@ -46,7 +49,8 @@ import { FormsModule } from '@angular/forms'; // pentru a merge ngModule
     AngularFireAuthModule,
     AngularFirestoreModule,    
     ZXingScannerModule,    
-    FormsModule,      
+    FormsModule,  
+    HttpClientModule,    
     
     
   ],

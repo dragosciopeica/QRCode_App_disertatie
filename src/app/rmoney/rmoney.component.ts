@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { Router } from '@angular/router';
+import { OrderPService } from '../order-p.service';
 
 
 
@@ -19,7 +20,10 @@ qrData = null;
 createdCode = null;
 
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private service: OrderPService) { 
+
+    
+  }
 
 
   ngAfterViewInit() {
@@ -56,12 +60,20 @@ createdCode = null;
   }   
   })
   .render(this.paypalElement.nativeElement);
+
+  
+
+
   
   
+  this.service.sendPostRequest();
+
+
   }
 
   ngOnInit(): void {
    
+    
   }
 
 
@@ -74,7 +86,6 @@ this.createdCode = this.qrData;
 gback(){
 
   this.router.navigate(['/members']);
-
 
 }
 
