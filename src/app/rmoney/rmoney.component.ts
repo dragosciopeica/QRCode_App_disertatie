@@ -2,8 +2,7 @@ import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angula
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { Router } from '@angular/router';
 import { OrderPService } from '../order-p.service';
-
-
+import { AngularFirestore } from '@angular/fire/firestore'
 
 declare var paypal;
 
@@ -16,72 +15,89 @@ export class RmoneyComponent implements AfterViewInit {
 
   @ViewChild('paypal', {static: false}) paypalElement: ElementRef;
 
-qrData = null;
+id: string;
+qrData: string;
 createdCode = null;
+url_payment = 'https://www.sandbox.paypal.com/checkoutnow?token=';
 
+  constructor(private router: Router, private service: OrderPService, private firestore: AngularFirestore) { 
 
-  constructor(private router: Router, private service: OrderPService) { 
-
-    
+  
   }
 
 
   ngAfterViewInit() {
 
-    paypal    
-    .Buttons({
+  //   paypal    
+  //   .Buttons({
 
-      style: {
-        color:  'black',
-        shape:  'pill',
-        label:  'pay',
-        height: 40
-    },
+  //     style: {
+  //       color:  'black',
+  //       shape:  'pill',
+  //       label:  'pay',
+  //       height: 40
+  //   },
 
-      createOrder: (data, actions) =>{
-        return actions.order.create({
-          purchase_units: [
-            {
+  //     createOrder: (data, actions) =>{
+  //       return actions.order.create({
+  //         purchase_units: [
+  //           {
               
-              amount: {
-                currency_code: 'USD',
-                value: Number(this.qrData)
-              }
-            }
-          ]
-        });
-      },
-    onApprove: async (data, actions)  => {
-        const order = await actions.order.capture();      
-        console.log(order);
-    },
-  onError: err => {
-    console.log(err);
-  }   
-  })
-  .render(this.paypalElement.nativeElement);
+  //             amount: {
+  //               currency_code: 'USD',
+  //               value: Number(this.qrData)
+  //             }
+  //           }
+  //         ]
+  //       });
+  //     },
+  //   onApprove: async (data, actions)  => {
+  //       const order = await actions.order.capture();      
+  //       console.log(order);
+  //   },
+  // onError: err => {
+  //   console.log(err);
+  // }   
+  // })
+  // .render(this.paypalElement.nativeElement);
 
   
 
 
   
+
+
+
+  //this.service.UserId();
+
+
+
+
+
+
   
-  this.service.sendPostRequest();
-
-
   }
 
-  ngOnInit(): void {
-   
-    
-  }
+
+  // ngOnInit(): void {  }
 
 
+apasa() {
+  console.log("Id-ul este:",this.id);
+}
 
 createCode(){
-this.createdCode = this.qrData;
+
+this.service.sendPostRequest(this.qrData).subscribe( res => {
+    console.log("Post call success returned in body",this.id = res.id);
+  });
+
+setTimeout(() =>  this.createdCode = `${this.url_payment}${this.id}`,3500);
 
 }
+
+
+
 
 gback(){
 
