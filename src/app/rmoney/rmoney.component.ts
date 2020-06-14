@@ -3,6 +3,7 @@ import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { Router } from '@angular/router';
 import { OrderPService } from '../order-p.service';
 import { AngularFirestore } from '@angular/fire/firestore'
+import { Order } from '../../app/models/Order'
 
 declare var paypal;
 
@@ -11,14 +12,20 @@ declare var paypal;
   templateUrl: './rmoney.component.html',
   styleUrls: ['./rmoney.component.scss']
 })
+
+
+
 export class RmoneyComponent implements AfterViewInit {
 
   @ViewChild('paypal', {static: false}) paypalElement: ElementRef;
 
+order: Order;
 id: string;
 qrData: string;
 createdCode = null;
 url_payment = 'https://www.sandbox.paypal.com/checkoutnow?token=';
+
+
 
   constructor(private router: Router, private service: OrderPService, private firestore: AngularFirestore) { 
 
@@ -65,16 +72,8 @@ url_payment = 'https://www.sandbox.paypal.com/checkoutnow?token=';
 
 
   
-
-
-
-  //this.service.UserId();
-
-
-
-
-
-
+  // this.service.sendPostRequest('11').then(res  => console.log(this.order = res));
+  
   
   }
 
@@ -82,17 +81,16 @@ url_payment = 'https://www.sandbox.paypal.com/checkoutnow?token=';
   // ngOnInit(): void {  }
 
 
-apasa() {
-  console.log("Id-ul este:",this.id);
-}
+// apasa() {
+//   console.log(this.order.id);
+// }
 
 createCode(){
 
-this.service.sendPostRequest(this.qrData).subscribe( res => {
-    console.log("Post call success returned in body",this.id = res.id);
+this.service.sendPostRequest(this.qrData).then(res  => {
+  this.order = res;
+  this.createdCode = `${this.url_payment}${this.order.id}`;
   });
-
-setTimeout(() =>  this.createdCode = `${this.url_payment}${this.id}`,3500);
 
 }
 

@@ -8,7 +8,7 @@
 
       <div #paypal></div> 
 
-        <input type="text" placeholder="Introdu suma dorita si apasa butonul Create" [(ngModel)]="qrData">
+        <input type="text" class="Suma" placeholder="Introduu suma si apasa butonul Create" [(ngModel)]="qrData">
         
         <button (click)="createCode()" class="qrButt">Create QRCode</button>
         
@@ -23,16 +23,19 @@
 
 
        <!-- Explicatie errorCorrection: https://www.fastprint.co.uk/blog/quick-response-codes-what-are-they-and-how-do-they-work.html -->
-      <!-- <p>You will receive <strong>{{createdCode}}</strong> RON</p> -->
+      <p>You will receive <strong>{{createdCode}}</strong> RON</p>
 
-      <button class="gback" (click)="gback()">
-        Back
-      </button>
-  
+     
+    
+     
     </div>   
         
 
+    <button class="gback" (click)="gback()">
+      Back
+    </button>
 
+  
   
     </div>
   </body>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Observable} from "rxjs"
-
+import {Order} from '../app/models/Order'
 
 
 @Injectable({
@@ -10,7 +10,7 @@ import {Observable} from "rxjs"
 export class OrderPService {
 
   
-  
+ 
   url: string = 'https://api.sandbox.paypal.com/v2/checkout/orders'  
   url_user_id: string = 'https://api.sandbox.paypal.com/v1/identity/oauth2/userinfo?schema=paypalv1.1'  
   static ngInjectableDef = undefined;
@@ -23,11 +23,11 @@ export class OrderPService {
 
 
   // folosit pentru a primi un link de tranzactie
-  sendPostRequest(value: string) {
+ sendPostRequest(value: string):Promise<Order> {
 
     const headers = new HttpHeaders()
         .set('Content-Type', 'application/json')        
-        .set('Authorization', 'Bearer A21AAFw5_M2kr57cJ6EAOAHXzHvLqpBMU9xpVvIWBMfhWZZVdDXqhV2JVYOdbA26Hs7vjZijvOf0UwZYXsRskkcLyA19HYi8Q');        
+        .set('Authorization', 'Bearer A21AAFoiLfEo8RH5urQEl9y6w7VFLFJRrcqbHoMc9ov7RVNKPd-z5NZQGQkqaY1-n1plL87xCH9x5WetoYAkHVfQPCIED3_1A');        
 
     const body = {
       intent: 'CAPTURE',
@@ -42,14 +42,21 @@ export class OrderPService {
         
     }
 
-    return this.http
-               .post(this.url, body, { headers: headers });
+       
+    return  this.http.post<Order>(this.url, body, { headers: headers }).toPromise();
+   
 
+              }  
+
+
+
+              
+               // o sa-i dau subscribe in COmponenta
               //  .subscribe(res => {
               //     console.log("Post call success returned in body",res.id)
               //     this.id_sv = res.id;
               //   });
-}       
+     
 
 
 
