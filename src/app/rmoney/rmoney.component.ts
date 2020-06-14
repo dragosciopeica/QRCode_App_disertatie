@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { OrderPService } from '../order-p.service';
 import { AngularFirestore } from '@angular/fire/firestore'
 import { Order } from '../../app/models/Order'
+import { FB_Order } from '../../app/models/fb_orders'
 
 declare var paypal;
 
@@ -19,6 +20,8 @@ export class RmoneyComponent implements AfterViewInit {
 
   @ViewChild('paypal', {static: false}) paypalElement: ElementRef;
 
+id_paypal: string = 'E49TR7ZFLVK4J';
+ok: number;
 order: Order;
 id: string;
 qrData: string;
@@ -27,13 +30,83 @@ url_payment = 'https://www.sandbox.paypal.com/checkoutnow?token=';
 
 
 
-  constructor(private router: Router, private service: OrderPService, private firestore: AngularFirestore) { 
+  constructor(private router: Router, private service: OrderPService, private firestore: AngularFirestore) {  }
+
+
+  gback(){  this.router.navigate(['/members']);  }
+  
+  ngAfterViewInit() { this.service.UserId().subscribe(res=>console.log(res.payer_id)); }
+
+
+
+  // cum fac sa am order id in afara '.then'-ului!!
+  // async si await!
+  async createCode(){
+
+    await this.service.sendPostRequest(this.qrData).then(res  => {
+      this.order = res;
+      this.createdCode = `${this.url_payment}${res.id}`;
+            
+    })    
+  
+   this.service.addinFirebase(this.order);
+
+    
+
+  }; // end create 
+
+
+
+      // this.service.ApproveOrder();      
+      // this.service.UserId().subscribe(res=>console.log(res.payer_id));
+      
+
+ApproveOrder() {
+
+  this.service.ApproveOrder().subscribe(res => console.log(res));
+
+
 
   
-  }
+}
 
 
-  ngAfterViewInit() {
+
+}
+
+
+ 
+
+  
+
+ 
+  
+
+ 
+ 
+
+      // if(this.ok == 1) {
+      //   this.firestore.collection("Orders").add(this.order);
+      //   console.log(this.order);
+      // }
+
+
+      
+     
+    
+
+    
+    
+    
+    
+    
+  
+
+
+
+
+
+
 
   //   paypal    
   //   .Buttons({
@@ -69,13 +142,13 @@ url_payment = 'https://www.sandbox.paypal.com/checkoutnow?token=';
   // .render(this.paypalElement.nativeElement);
 
   
+  //this.service.sendPostRequest2().subscribe(res => console.log(res));
 
-
   
-  // this.service.sendPostRequest('11').then(res  => console.log(this.order = res));
+  // this.service.sendPostRequest2 ('11').then(res  => console.log(this.order = res));
   
   
-  }
+  
 
 
   // ngOnInit(): void {  }
@@ -85,22 +158,4 @@ url_payment = 'https://www.sandbox.paypal.com/checkoutnow?token=';
 //   console.log(this.order.id);
 // }
 
-createCode(){
 
-this.service.sendPostRequest(this.qrData).then(res  => {
-  this.order = res;
-  this.createdCode = `${this.url_payment}${this.order.id}`;
-  });
-
-}
-
-
-
-
-gback(){
-
-  this.router.navigate(['/members']);
-
-}
-
-}

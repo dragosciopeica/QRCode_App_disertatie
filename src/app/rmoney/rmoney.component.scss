@@ -2,6 +2,12 @@
     box-sizing: border-box;
 }
 
+
+.qr_code{
+
+    text-align: center;
+}
+
 .container2 {
     // aici ii dam display flex, tot ce e in el, sunt "copiii".
     // Am folosit site-ul asta: https://css-tricks.com/snippets/css/a-guide-to-flexbox/
@@ -49,7 +55,7 @@
 .gback {
 
     display: block;
-   
+    margin-bottom: 50px;
     margin-top: 50px;
     margin: auto 0;
     border:none;

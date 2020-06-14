@@ -6,6 +6,7 @@ import { EmailComponent } from './email/email.component';
 import { MembersComponent } from './members/members.component';
 import { SmoneyComponent } from './smoney/smoney.component';
 import { RmoneyComponent } from './rmoney/rmoney.component';
+import { PayDoneComponent} from './pay-done/pay-done.component';
 
 //Pentru a nu ne lasa sa accesam paginile fara a fi logati
 import { AngularFireAuthGuard, redirectUnauthorizedTo, canActivate} from '@angular/fire/auth-guard';
@@ -25,6 +26,9 @@ const routes: Routes = [
   canActivate:[AngularFireAuthGuard],
   data: { authGuardPipe: redirectUnauthorizedToMainPage} },  
   { path: 'rmoney', component: RmoneyComponent,
+  canActivate:[AngularFireAuthGuard],
+  data: { authGuardPipe: redirectUnauthorizedToMainPage} },
+  { path: 'paydone', component: PayDoneComponent,
   canActivate:[AngularFireAuthGuard],
   data: { authGuardPipe: redirectUnauthorizedToMainPage} },
   

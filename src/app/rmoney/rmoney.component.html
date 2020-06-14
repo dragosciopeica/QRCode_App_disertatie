@@ -12,7 +12,7 @@
         
         <button (click)="createCode()" class="qrButt">Create QRCode</button>
         
-        <div>
+        <div class="qr_code">
 
     <ngx-qrcode       
             [value] = "createdCode"
@@ -26,14 +26,17 @@
       <p>You will receive <strong>{{createdCode}}</strong> RON</p>
 
      
-    
-     
     </div>   
         
 
     <button class="gback" (click)="gback()">
       Back
     </button>
+
+     <button  (click)="ApproveOrder()" >
+      Back
+    </button>
+
 
   
   

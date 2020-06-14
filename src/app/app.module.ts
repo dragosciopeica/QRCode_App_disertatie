@@ -23,6 +23,7 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { FormsModule } from '@angular/forms'; // pentru a merge ngModule
 import { HttpClientModule } from '@angular/common/http';
+import { PayDoneComponent } from './pay-done/pay-done.component';
 
 
 
@@ -38,6 +39,7 @@ import { HttpClientModule } from '@angular/common/http';
     MembersComponent,
     SmoneyComponent,
     RmoneyComponent,
+    PayDoneComponent,
     
     
   ],
