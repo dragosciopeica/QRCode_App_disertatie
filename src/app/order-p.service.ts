@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {Observable} from "rxjs"
+import {Observable, Subject, BehaviorSubject} from "rxjs"
 import {Order} from '../app/models/Order'
 import {FB_Order} from '../app/models/fb_orders'
 import {LoginComponent}  from '../app/login/login.component'
@@ -11,20 +11,41 @@ import { AngularFirestore } from '@angular/fire/firestore'
 })
 export class OrderPService {
 
+  isDone = false;  
+  isDoneVisible: BehaviorSubject<boolean> ;
   
   user: LoginComponent;
   url: string = 'https://api.sandbox.paypal.com/v2/checkout/orders'  
   url2: string = 'https://api.sandbox.paypal.com/v2/checkout/orders/'  
   url2_a: string = '/capture'  
   url3: string = 'https://api.sandbox.paypal.com/v1/identity/oauth2/userinfo?schema=paypalv1.1' 
+  url4: string = 'https://api.sandbox.paypal.com/v2/checkout/orders/' 
 
   static ngInjectableDef = undefined;
 
   constructor(private http: HttpClient, private firestore: AngularFirestore) { 
 
+    this.isDoneVisible = new BehaviorSubject<boolean>(false);
+
+    this.isDoneVisible.subscribe((value) => {
+      this.isDone = value;
+    })
+   
     
+
   }
 
+//   this.IsDone = done
+// this.IsDoneVisible.next(this.isDone)
+
+toggleisDone(done){
+  this.isDone= done;
+  this.isDoneVisible.next(this.isDone);
+}
+
+isDoneF():Observable<boolean> {
+  return this.isDoneVisible.asObservable();
+}
 
 
 
@@ -34,7 +55,7 @@ export class OrderPService {
  sendPostRequest(value: string):Promise<Order> {
     const headers = new HttpHeaders()
         .set('Content-Type', 'application/json')        
-        .set('Authorization', 'Bearer A21AAF8cgXiovmgj561VSEkvePrNbuuEpxxFWCg-iwju2kKr5lShG10J7YleEGXXwGoOMqWVNMsnC_00cjDTLWOOeOjkq-Eug');
+        .set('Authorization', 'Bearer A21AAGLULh5t9C92DTxMcVH_6EZ2bu867KOPk4t3wb2z6jfWvFh91MT8XXuXqYXWTmXs7_jUVCjpg5C2bfDojzwqjU196QYgQ');
         
       const body = {
       'intent': 'CAPTURE',
@@ -51,6 +72,7 @@ export class OrderPService {
         'shipping_preference':'NO_SHIPPING',
         'user_action': 'PAY_NOW',
         'return_url': 'http://localhost:4200/paydone',
+        // 'return_url': 'https://qrcodepay-9f4be.web.app/paydone',
          
     },
     'order_request': [{
@@ -76,7 +98,7 @@ export class OrderPService {
 
         const headers = new HttpHeaders()
         .set('Content-Type', 'application/json')        
-        .set('Authorization', 'Bearer A21AAF8cgXiovmgj561VSEkvePrNbuuEpxxFWCg-iwju2kKr5lShG10J7YleEGXXwGoOMqWVNMsnC_00cjDTLWOOeOjkq-Eug');
+        .set('Authorization', 'Bearer A21AAGLULh5t9C92DTxMcVH_6EZ2bu867KOPk4t3wb2z6jfWvFh91MT8XXuXqYXWTmXs7_jUVCjpg5C2bfDojzwqjU196QYgQ');
         
         const body = { 
           'payer_id' : 'E49TR7ZFLVK4J',
@@ -90,10 +112,21 @@ export class OrderPService {
 
     const headers = new HttpHeaders()
     .set('Content-Type', 'application/json')        
-    .set('Authorization', 'Bearer A21AAF8cgXiovmgj561VSEkvePrNbuuEpxxFWCg-iwju2kKr5lShG10J7YleEGXXwGoOMqWVNMsnC_00cjDTLWOOeOjkq-Eug');
+    .set('Authorization', 'Bearer A21AAGLULh5t9C92DTxMcVH_6EZ2bu867KOPk4t3wb2z6jfWvFh91MT8XXuXqYXWTmXs7_jUVCjpg5C2bfDojzwqjU196QYgQ');
   
     
       return  this.http.get(this.url3, { headers: headers })
+
+  }
+
+  getOrderStatus(order_id: string):Promise<FB_Order>{
+
+    const headers = new HttpHeaders()
+    .set('Content-Type', 'application/json')        
+    .set('Authorization', 'Bearer A21AAGLULh5t9C92DTxMcVH_6EZ2bu867KOPk4t3wb2z6jfWvFh91MT8XXuXqYXWTmXs7_jUVCjpg5C2bfDojzwqjU196QYgQ');
+  
+    
+      return  this.http.get<FB_Order>(`${this.url4}${order_id}`, { headers: headers }).toPromise()
 
   }
 

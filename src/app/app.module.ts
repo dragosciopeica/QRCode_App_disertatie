@@ -26,6 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PayDoneComponent } from './pay-done/pay-done.component';
 import {UrlSerializer} from '@angular/router';
 import { CustomUrlSerializer } from './custom-url-serializer';
+import { OrderPService } from './order-p.service';
 
  
 
@@ -56,7 +57,7 @@ import { CustomUrlSerializer } from './custom-url-serializer';
     
     
   ],
-  providers: [RmoneyComponent,{provide: UrlSerializer, useClass: CustomUrlSerializer}],
+  providers: [OrderPService,{provide: UrlSerializer, useClass: CustomUrlSerializer}],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

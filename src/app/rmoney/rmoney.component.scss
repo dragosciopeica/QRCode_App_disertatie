@@ -25,17 +25,30 @@
 }
 
 
+.mij {
+
+    font-size: 1.2em;    
+    text-align: center;
+    margin-bottom: 50px;
+    display: inline-block;
+}
+
+.containerMiddle {
+
+    position: relative;
+}
+
 .Suma {   
     font-family: Poppins-Medium;
     line-height: 1.5;
     border:none; // scap de efectul ala de shaddow   
-    padding: 15px;
-    font-size: 1em;
+    padding: 25px;
+    font-size: 1.2em;
     text-align: center;
     margin-bottom: 15px;
-    width: 60%;
+    width: 75%;
     height: 25px;
-    border-radius: 25px;
+    border-radius: 20px;
 }
 
 .qrButt{    

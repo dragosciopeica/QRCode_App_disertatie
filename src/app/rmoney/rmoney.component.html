@@ -8,34 +8,38 @@
 
       <div #paypal></div> 
 
-        <input type="text" class="Suma" placeholder="Introduu suma si apasa butonul Create" [(ngModel)]="qrData">
+        <input type="text" class="Suma" placeholder="Adauga suma si apasa CreateQR" [(ngModel)]="qrData">
         
-        <button (click)="createCode()" class="qrButt">Create QRCode</button>
+        <button (click)="createCode()"  class="qrButt">Create QRCode</button>
         
-        <div class="qr_code">
+    <div class="containerMiddle">
+                <div class="qr_code">
 
-    <ngx-qrcode       
-            [value] = "createdCode"
-            errorCorrectionLevel = "L"
-            [elementType]="'img'"
-    >          
-      </ngx-qrcode>     
+                    <ngx-qrcode       
+                            [value] = "createdCode"
+                            errorCorrectionLevel = "L"
+                            [elementType]="'img'"
+                    >  </ngx-qrcode>     
+                      <!-- Explicatie errorCorrection: https://www.fastprint.co.uk/blog/quick-response-codes-what-are-they-and-how-do-they-work.html -->
+                     <p>You will receive <strong>{{createdCode}}</strong></p>             
+                </div>   
 
+            <div class="mij" *ngIf="ShowMsg" >
+                <p class="mij" *ngIf="!status_oD">Plata in procesare...</p>         
+                <p class="mij" *ngIf="status_oD">Plata finalizata cu succes!</p> 
+            </div>
+    </div>
 
-       <!-- Explicatie errorCorrection: https://www.fastprint.co.uk/blog/quick-response-codes-what-are-they-and-how-do-they-work.html -->
-      <p>You will receive <strong>{{createdCode}}</strong> RON</p>
-
-     
-    </div>   
-        
 
     <button class="gback" (click)="gback()">
       Back
     </button>
 
+
+<!-- 
      <button  (click)="Apasa()" >
       Back
-    </button>
+    </button> -->
 
 
   

@@ -5,6 +5,9 @@ import { OrderPService } from '../order-p.service';
 import { AngularFirestore } from '@angular/fire/firestore'
 import { Order } from '../../app/models/Order'
 import { FB_Order } from '../../app/models/fb_orders'
+import { PayDoneComponent } from '../pay-done/pay-done.component'
+import { Subscription } from 'rxjs';
+import { debounceTime, switchMap, filter } from 'rxjs/operators';
 
 //declare var paypal;
 
@@ -17,29 +20,35 @@ import { FB_Order } from '../../app/models/fb_orders'
 
 
 
-export class RmoneyComponent implements AfterViewInit {
+export class RmoneyComponent implements OnInit {
 
   @ViewChild('paypal', {static: false}) paypalElement: ElementRef;
 
-id_paypal: string = 'E49TR7ZFLVK4J';
+// id_paypal: string = 'E49TR7ZFLVK4J';
 ok: number;
 order: Order;
 id: string ;
 qrData: string;
 createdCode = null;
 url_payment = 'https://www.sandbox.paypal.com/checkoutnow?token=';
+doneOrnotX: boolean;
+isDoneSubscription$: Subscription;
+status_order: string;
+status_oD: boolean = false;
+ShowMsg: boolean = false;
+
+  constructor(private router: Router, private service: OrderPService, private firestore: AngularFirestore) { }
 
 
 
-  constructor(private router: Router, private service: OrderPService, private firestore: AngularFirestore) {  }
+
 
 
   gback(){  this.router.navigate(['/members']);  }
   
-  ngAfterViewInit() { 
-    // this.service.UserId().subscribe(res=>console.log(res.payer_id)); 
-  }
+  ngAfterViewInit() {}  
 
+  ngOnInit(): void { }
 
 
   // cum fac sa am order id in afara '.then'-ului!!
@@ -52,20 +61,29 @@ url_payment = 'https://www.sandbox.paypal.com/checkoutnow?token=';
             
     })    
   
-   this.id = this.order.id;
+   this.ShowMsg = true;
+   this.id = this.order.id; // iau ID-ul llocal de la Order-ul creat
+   this.service.addinFirebase(this.order); // Functie facuta sa adaug ORDER-ul in FIrebase ... nu mai are rost acum
 
-
-   this.service.addinFirebase(this.order);
-
-    
-
+   this.AutoCall_OrderStatus(); // functie prin care verific cand am "order_status" = "COMPLETED" in interfata beneficiarului.
+   
   }; // end create 
 
-
-Apasa(){
-
-  console.log(this.id);
+AutoCall_OrderStatus(){
+  let order = this.GetOrderStatus();
+  if(order != 'COMPLETED')
+        setTimeout(() => { this.AutoCall_OrderStatus();
+        console.log(order);}, 1500);
+  else this.status_oD = true;
 }
+ 
+
+ GetOrderStatus(){
+  this.service.getOrderStatus(this.order.id).then(res => { this.status_order = res.status; })
+  return this.status_order;  
+}
+
+
 
 
 
