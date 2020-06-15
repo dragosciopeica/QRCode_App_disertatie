@@ -21,6 +21,7 @@ export class PayDoneComponent implements OnInit {
 payer_id: string;
 order_id: string
 token_id: any;   
+done_or_not: number = 0;
 approve: FB_Order;
 
 //Back function
@@ -43,15 +44,13 @@ gback(){  this.router.navigate(['/members']);  }
 
     await this.service.ApproveOrder(this.order_id).then( res => {
       this.approve = res;    
-      console.log(this.approve);  
+      console.log(this.approve); 
+      this.done_or_not = 1;
     })
     console.log('Statsul comenzii este:',this.approve.status);
   }
 
-Apasa(){
 
-  console.log(this.order_id.id);
-}
 
 
 }
