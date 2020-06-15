@@ -14,13 +14,13 @@ declare var paypal;
 })
 
 // a fost afterViewInit
-export class SmoneyComponent implements AfterViewInit {
+export class SmoneyComponent implements AfterViewInit, OnInit {
 
 @ViewChild('paypal', {static: false}) paypalElement: ElementRef;
 
 
 
-qrResultString: number;
+qrResultString: string;
 onlyOnceP: boolean = true;
 onlyOnce: boolean = false;
 paidFor: boolean = false;
@@ -30,115 +30,27 @@ paidFor: boolean = false;
   constructor(private router: Router) {  }
 
 
-  ngOnInit(): void {  
+  ngOnInit(): void {  }
 
+  ngAfterViewInit() { }
 
-  
-  }
-
-  ngAfterViewInit() {
-
-    paypal    
-    .Buttons({
-
-      style: {
-        color:  'black',
-        shape:  'pill',
-        label:  'pay',
-        height: 40
-    },
-
-      createOrder: (data, actions) =>{
-        return actions.order.create({
-          purchase_units: [
-            {
-              
-              amount: {
-                currency_code: 'USD',
-                value: 20
-              }
-            }
-          ]
-        });
-      },
-    onApprove: async (data, actions)  => {
-        const order = await actions.order.capture();
-        this.paidFor = true;
-        this.onlyOnceP = false;
-        console.log(order);
-    },
-  onError: err => {
-    console.log(err);
-  }   
-  })
-  .render(this.paypalElement.nativeElement);
-  
-  
-  }
+  gback(){  this.router.navigate(['/members']); }
 
   
 
   clearResult(): void {
     this.qrResultString = null;
-    this.onlyOnceP = false; 
-    this.onlyOnce = false;     
+    
   }
 
   onCodeResult(resultString: string) {
 
-    if(this.onlyOnce == false){
-    
-    //set this bool to be true. Enter only once!    
-    this.onlyOnce = true;
-    this.onlyOnceP = true;
-    // take the string from QRCode
-    this.qrResultString = Number(resultString);
-    
-    // Make the paypal function appear
-    paypal    
-    .Buttons({
-
-      style: {
-        color:  'black',
-        shape:  'pill',
-        label:  'pay',
-        height: 40
-    },
-
-      createOrder: (data, actions) =>{
-        return actions.order.create({
-          purchase_units: [
-            {
-              
-              amount: {
-                currency_code: 'USD',
-                value: this.qrResultString
-              }
-            }
-          ]
-        });
-      },
-    onApprove: async (data, actions)  => {
-        const order = await actions.order.capture();
-        this.paidFor = true;
-        this.onlyOnceP = false;
-        console.log(order);
-    },
-  onError: err => {
-    console.log(err);
-  }   
-  })
-  .render(this.paypalElement.nativeElement);
-  
-    }
+        this.qrResultString = resultString;
+        
+   }
 
   }
 
-  gback(){
-
-    this.router.navigate(['/members']);
   
-  
-  }
 
-}
+

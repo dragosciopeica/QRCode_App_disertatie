@@ -21,7 +21,7 @@
                             [elementType]="'img'"
                     >  </ngx-qrcode>     
                       <!-- Explicatie errorCorrection: https://www.fastprint.co.uk/blog/quick-response-codes-what-are-they-and-how-do-they-work.html -->
-                     <p>You will receive <strong>{{createdCode}}</strong></p>             
+                     <p>You will receive <strong><a href="{{createdCode}}">{{createdCode}}</a></strong></p>             
                 </div>   
 
             <div class="mij" *ngIf="ShowMsg" >

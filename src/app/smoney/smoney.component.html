@@ -4,6 +4,15 @@
       <div class="mij">
         <h1>Scaneaza codul</h1>
         <zxing-scanner (scanSuccess)="onCodeResult($event)"> </zxing-scanner>
+
+        <div class="results" *ngIf="qrResultString">  
+              <div>
+                <small>Ai de platit:</small>
+                <a href="{{qrResultString}}">{{qrResultString}}</a>
+              </div>       
+            <button (click) = "clearResult()">&times;</button>  
+        </div>
+
       </div>
         
         <button class="gback" (click)="gback()">

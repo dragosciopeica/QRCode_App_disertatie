@@ -55,7 +55,7 @@ isDoneF():Observable<boolean> {
  sendPostRequest(value: string):Promise<Order> {
     const headers = new HttpHeaders()
         .set('Content-Type', 'application/json')        
-        .set('Authorization', 'Bearer A21AAGLULh5t9C92DTxMcVH_6EZ2bu867KOPk4t3wb2z6jfWvFh91MT8XXuXqYXWTmXs7_jUVCjpg5C2bfDojzwqjU196QYgQ');
+        .set('Authorization', 'Bearer A21AAFmfqLAjhmG74EnMAi7I_avaVGvDnI5Khkpbm7k9ZQ01gx5b0eY7C69D31Gs1dGU49Cplc429sl-Lr39SKA-g37eRZTDQ');
         
       const body = {
       'intent': 'CAPTURE',
@@ -71,8 +71,8 @@ isDoneF():Observable<boolean> {
         
         'shipping_preference':'NO_SHIPPING',
         'user_action': 'PAY_NOW',
-        'return_url': 'http://localhost:4200/paydone',
-        // 'return_url': 'https://qrcodepay-9f4be.web.app/paydone',
+        // 'return_url': 'http://localhost:4200/paydone',
+        'return_url': 'https://qrcodepay-9f4be.web.app/paydone',
          
     },
     'order_request': [{
@@ -98,7 +98,7 @@ isDoneF():Observable<boolean> {
 
         const headers = new HttpHeaders()
         .set('Content-Type', 'application/json')        
-        .set('Authorization', 'Bearer A21AAGLULh5t9C92DTxMcVH_6EZ2bu867KOPk4t3wb2z6jfWvFh91MT8XXuXqYXWTmXs7_jUVCjpg5C2bfDojzwqjU196QYgQ');
+        .set('Authorization', 'Bearer A21AAFmfqLAjhmG74EnMAi7I_avaVGvDnI5Khkpbm7k9ZQ01gx5b0eY7C69D31Gs1dGU49Cplc429sl-Lr39SKA-g37eRZTDQ');
         
         const body = { 
           'payer_id' : 'E49TR7ZFLVK4J',
@@ -112,7 +112,7 @@ isDoneF():Observable<boolean> {
 
     const headers = new HttpHeaders()
     .set('Content-Type', 'application/json')        
-    .set('Authorization', 'Bearer A21AAGLULh5t9C92DTxMcVH_6EZ2bu867KOPk4t3wb2z6jfWvFh91MT8XXuXqYXWTmXs7_jUVCjpg5C2bfDojzwqjU196QYgQ');
+    .set('Authorization', 'Bearer A21AAFmfqLAjhmG74EnMAi7I_avaVGvDnI5Khkpbm7k9ZQ01gx5b0eY7C69D31Gs1dGU49Cplc429sl-Lr39SKA-g37eRZTDQ');
   
     
       return  this.http.get(this.url3, { headers: headers })
@@ -123,7 +123,7 @@ isDoneF():Observable<boolean> {
 
     const headers = new HttpHeaders()
     .set('Content-Type', 'application/json')        
-    .set('Authorization', 'Bearer A21AAGLULh5t9C92DTxMcVH_6EZ2bu867KOPk4t3wb2z6jfWvFh91MT8XXuXqYXWTmXs7_jUVCjpg5C2bfDojzwqjU196QYgQ');
+    .set('Authorization', 'Bearer A21AAFmfqLAjhmG74EnMAi7I_avaVGvDnI5Khkpbm7k9ZQ01gx5b0eY7C69D31Gs1dGU49Cplc429sl-Lr39SKA-g37eRZTDQ');
   
     
       return  this.http.get<FB_Order>(`${this.url4}${order_id}`, { headers: headers }).toPromise()
