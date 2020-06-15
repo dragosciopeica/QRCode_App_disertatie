@@ -24,8 +24,8 @@ import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { FormsModule } from '@angular/forms'; // pentru a merge ngModule
 import { HttpClientModule } from '@angular/common/http';
 import { PayDoneComponent } from './pay-done/pay-done.component';
-
-
+import {UrlSerializer} from '@angular/router';
+import { CustomUrlSerializer } from './custom-url-serializer';
 
  
 
@@ -56,7 +56,7 @@ import { PayDoneComponent } from './pay-done/pay-done.component';
     
     
   ],
-  providers: [],
+  providers: [RmoneyComponent,{provide: UrlSerializer, useClass: CustomUrlSerializer}],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

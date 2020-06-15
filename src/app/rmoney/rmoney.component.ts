@@ -6,7 +6,8 @@ import { AngularFirestore } from '@angular/fire/firestore'
 import { Order } from '../../app/models/Order'
 import { FB_Order } from '../../app/models/fb_orders'
 
-declare var paypal;
+//declare var paypal;
+
 
 @Component({
   selector: 'app-rmoney',
@@ -23,7 +24,7 @@ export class RmoneyComponent implements AfterViewInit {
 id_paypal: string = 'E49TR7ZFLVK4J';
 ok: number;
 order: Order;
-id: string;
+id: string ;
 qrData: string;
 createdCode = null;
 url_payment = 'https://www.sandbox.paypal.com/checkoutnow?token=';
@@ -35,7 +36,9 @@ url_payment = 'https://www.sandbox.paypal.com/checkoutnow?token=';
 
   gback(){  this.router.navigate(['/members']);  }
   
-  ngAfterViewInit() { this.service.UserId().subscribe(res=>console.log(res.payer_id)); }
+  ngAfterViewInit() { 
+    // this.service.UserId().subscribe(res=>console.log(res.payer_id)); 
+  }
 
 
 
@@ -49,6 +52,9 @@ url_payment = 'https://www.sandbox.paypal.com/checkoutnow?token=';
             
     })    
   
+   this.id = this.order.id;
+
+
    this.service.addinFirebase(this.order);
 
     
@@ -56,22 +62,24 @@ url_payment = 'https://www.sandbox.paypal.com/checkoutnow?token=';
   }; // end create 
 
 
+Apasa(){
+
+  console.log(this.id);
+}
+
+
+
+
+
 
       // this.service.ApproveOrder();      
       // this.service.UserId().subscribe(res=>console.log(res.payer_id));
       
 
-ApproveOrder() {
+// ApproveOrder() {
 
-  this.service.ApproveOrder().subscribe(res => console.log(res));
-
-
-
+//   this.service.ApproveOrder().subscribe(res => console.log(res));
   
-}
-
-
-
 }
 
 

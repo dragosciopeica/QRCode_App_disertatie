@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Observable} from "rxjs"
 import {Order} from '../app/models/Order'
+import {FB_Order} from '../app/models/fb_orders'
 import {LoginComponent}  from '../app/login/login.component'
 import { AngularFirestore } from '@angular/fire/firestore'
 
@@ -13,7 +14,8 @@ export class OrderPService {
   
   user: LoginComponent;
   url: string = 'https://api.sandbox.paypal.com/v2/checkout/orders'  
-  url2: string = 'https://api.sandbox.paypal.com/v2/checkout/orders/2P419546SJ4527003/capture'  
+  url2: string = 'https://api.sandbox.paypal.com/v2/checkout/orders/'  
+  url2_a: string = '/capture'  
   url3: string = 'https://api.sandbox.paypal.com/v1/identity/oauth2/userinfo?schema=paypalv1.1' 
 
   static ngInjectableDef = undefined;
@@ -70,7 +72,7 @@ export class OrderPService {
   }
   }
 
-  ApproveOrder(){
+  ApproveOrder(order_id: string):Promise<FB_Order>{
 
         const headers = new HttpHeaders()
         .set('Content-Type', 'application/json')        
@@ -80,7 +82,7 @@ export class OrderPService {
           'payer_id' : 'E49TR7ZFLVK4J',
         }
         
-          return  this.http.post(this.url2, body, { headers: headers })
+          return  this.http.post<FB_Order>(`${this.url2}${order_id}${this.url2_a}`, body, { headers: headers }).toPromise();
   }
 
 
